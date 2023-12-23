@@ -1,0 +1,151 @@
+[debug] [2023-11-26T08:08:57.666Z] ----------------------------------------------------------------------
+[debug] [2023-11-26T08:08:57.669Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\khoin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-11-26T08:08:57.670Z] CLI Version:   12.9.1
+[debug] [2023-11-26T08:08:57.671Z] Platform:      win32
+[debug] [2023-11-26T08:08:57.671Z] Node Version:  v18.17.1
+[debug] [2023-11-26T08:08:57.673Z] Time:          Sun Nov 26 2023 15:08:57 GMT+0700 (Indochina Time)
+[debug] [2023-11-26T08:08:57.673Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-11-26T08:08:57.772Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-11-26T08:08:57.773Z] > authorizing via signed-in user (52000841@student.tdtu.edu.vn)
+[debug] [2023-11-26T08:08:57.773Z] [iam] checking project bds-28 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-11-26T08:08:57.775Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/bds-28:testIamPermissions [none]
+[debug] [2023-11-26T08:08:57.781Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/bds-28:testIamPermissions x-goog-quota-user=projects/bds-28
+[debug] [2023-11-26T08:08:57.781Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bds-28:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-11-26T08:08:58.836Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/bds-28:testIamPermissions 200
+[debug] [2023-11-26T08:08:58.836Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/bds-28:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-11-26T08:08:58.837Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/bds-28 [none]
+[debug] [2023-11-26T08:08:59.185Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/bds-28 200
+[debug] [2023-11-26T08:08:59.185Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/bds-28 {"projectId":"bds-28","projectNumber":"840544543755","displayName":"bds-28","name":"projects/bds-28","resources":{"hostingSite":"bds-28"},"state":"ACTIVE","etag":"1_58bc45fd-fc2c-4b63-a541-17f2bf2c3f16"}
+[info] 
+[info] === Deploying to 'bds-28'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-11-26T08:08:59.193Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions [none]
+[debug] [2023-11-26T08:08:59.193Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-11-26T08:09:00.248Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions 200
+[debug] [2023-11-26T08:09:00.248Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions {"name":"projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[bds-28]: beginning deploy... 
+[info] i  hosting[bds-28]: found 16 files in dist/my-first-app 
+[debug] [2023-11-26T08:09:20.271Z] [hosting] uploading with 200 concurrency
+[debug] [2023-11-26T08:09:20.273Z] [hosting] hash cache [ZGlzdFxteS1maXJzdC1hcHA] not populated
+[debug] [2023-11-26T08:09:20.371Z] [hosting] hash cache [ZGlzdFxteS1maXJzdC1hcHA] stored for 16 files
+[debug] [2023-11-26T08:09:20.371Z] [hosting][hash queue][FINAL] {"max":89,"min":24,"avg":33.9375,"active":0,"complete":16,"success":16,"errored":0,"retried":0,"total":16,"elapsed":97}
+[debug] [2023-11-26T08:09:20.375Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1:populateFiles [none]
+[debug] [2023-11-26T08:09:20.375Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1:populateFiles {"files":{"/favicon.ico":"2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7","/index.html":"1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4","/runtime.03ccc4b08a666011.js":"ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be","/polyfills.8eb5ba82180e406d.js":"5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0","/assets/forms.css":"def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795","/assets/tabs.css":"7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe","/assets/images/01.jpg":"db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8","/assets/images/02.jpg":"ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b","/assets/images/03.jpg":"56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338","/3rdpartylicenses.txt":"efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519","/data/properties.json":"4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63","/assets/images/house_default.jpg":"25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb","/assets/images/04.jpg":"55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb","/styles.76b60ca64e16981d.css":"0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a","/assets/images/05.jpg":"e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3","/main.3ab03ca567b638c3.js":"5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d"}}
+[debug] [2023-11-26T08:09:21.020Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1:populateFiles 200
+[debug] [2023-11-26T08:09:21.020Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1:populateFiles {"uploadRequiredHashes":["56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338","efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519","5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d","db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8","def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795","5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0","55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb","ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b","0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a","4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63","25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb","e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3","2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7","ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be","7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe","1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files"}
+[debug] [2023-11-26T08:09:21.024Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338 [none]
+[debug] [2023-11-26T08:09:21.025Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338 [stream]
+[debug] [2023-11-26T08:09:21.029Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519 [none]
+[debug] [2023-11-26T08:09:21.029Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519 [stream]
+[debug] [2023-11-26T08:09:21.031Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d [none]
+[debug] [2023-11-26T08:09:21.032Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d [stream]
+[debug] [2023-11-26T08:09:21.033Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8 [none]
+[debug] [2023-11-26T08:09:21.033Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8 [stream]
+[debug] [2023-11-26T08:09:21.036Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795 [none]
+[debug] [2023-11-26T08:09:21.036Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795 [stream]
+[debug] [2023-11-26T08:09:21.038Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0 [none]
+[debug] [2023-11-26T08:09:21.038Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0 [stream]
+[debug] [2023-11-26T08:09:21.041Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb [none]
+[debug] [2023-11-26T08:09:21.041Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb [stream]
+[debug] [2023-11-26T08:09:21.043Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b [none]
+[debug] [2023-11-26T08:09:21.043Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b [stream]
+[debug] [2023-11-26T08:09:21.045Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a [none]
+[debug] [2023-11-26T08:09:21.045Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a [stream]
+[debug] [2023-11-26T08:09:21.047Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63 [none]
+[debug] [2023-11-26T08:09:21.048Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63 [stream]
+[debug] [2023-11-26T08:09:21.050Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb [none]
+[debug] [2023-11-26T08:09:21.052Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb [stream]
+[debug] [2023-11-26T08:09:21.055Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3 [none]
+[debug] [2023-11-26T08:09:21.055Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3 [stream]
+[debug] [2023-11-26T08:09:21.057Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7 [none]
+[debug] [2023-11-26T08:09:21.057Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7 [stream]
+[debug] [2023-11-26T08:09:21.059Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be [none]
+[debug] [2023-11-26T08:09:21.059Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be [stream]
+[debug] [2023-11-26T08:09:21.061Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe [none]
+[debug] [2023-11-26T08:09:21.061Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe [stream]
+[debug] [2023-11-26T08:09:21.062Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4 [none]
+[debug] [2023-11-26T08:09:21.062Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4 [stream]
+[debug] [2023-11-26T08:09:21.064Z] [hosting][populate queue][FINAL] {"max":658,"min":658,"avg":658,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":698}
+[debug] [2023-11-26T08:09:21.064Z] [hosting] uploads queued: 16
+[debug] [2023-11-26T08:09:22.099Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb 200
+[debug] [2023-11-26T08:09:22.099Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/25156b7d2243d5efa36fb35c0e6e54c82e0296867da061abd8c3079404512dfb [stream]
+[debug] [2023-11-26T08:09:22.111Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be 200
+[debug] [2023-11-26T08:09:22.111Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ced7a4d426275ef21a9eb70cc9efd37322094b128d41db65552d5e08625765be [stream]
+[debug] [2023-11-26T08:09:22.117Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7 200
+[debug] [2023-11-26T08:09:22.117Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/2c19690e9587bae12f419b34d2edeecc76808099540a9c9f4ea6194116cfc8f7 [stream]
+[debug] [2023-11-26T08:09:22.118Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b 200
+[debug] [2023-11-26T08:09:22.118Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/ae74635af9baaef125ab5bc043725532a404771b420f19e6f00fa0a29b82825b [stream]
+[debug] [2023-11-26T08:09:22.135Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519 200
+[debug] [2023-11-26T08:09:22.135Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/efdbc32a3fb5c6aaef80bbb5d14c86bb7d9702de7ba38b5d3bf47cfa6257d519 [stream]
+[debug] [2023-11-26T08:09:22.172Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe 200
+[debug] [2023-11-26T08:09:22.172Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/7843dddcc02663824737caf9223192f75abc614dd9e5f861a1726f65351254fe [stream]
+[debug] [2023-11-26T08:09:22.195Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0 200
+[debug] [2023-11-26T08:09:22.195Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5b8f5e2aac706a41296309b3024f92dd83b7debd4aa293766d30747332cde2a0 [stream]
+[debug] [2023-11-26T08:09:22.195Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3 200
+[debug] [2023-11-26T08:09:22.195Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/e2575e62c9b734578f730efdef91b8a83dc0d6040d832823e6601b41bb4dc9e3 [stream]
+[debug] [2023-11-26T08:09:22.210Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a 200
+[debug] [2023-11-26T08:09:22.210Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/0dc1e24fa34bd605466ff45ce414f24a3bf5d4de990621445483f8e311156c1a [stream]
+[debug] [2023-11-26T08:09:22.214Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8 200
+[debug] [2023-11-26T08:09:22.214Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/db276808301bb833b6027d54424847a6486dd73c16645a3e3a0f7daa327550a8 [stream]
+[debug] [2023-11-26T08:09:22.236Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4 200
+[debug] [2023-11-26T08:09:22.236Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/1e90640d8cce6f0cc3d5c842607e12bf7666925babf78f3a77635bbddaba3ae4 [stream]
+[debug] [2023-11-26T08:09:22.270Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338 200
+[debug] [2023-11-26T08:09:22.270Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/56f5ed70f33203404e8e876a58a8c2205afb1d7a20f4203d527221ab1a403338 [stream]
+[debug] [2023-11-26T08:09:22.368Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d 200
+[debug] [2023-11-26T08:09:22.368Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/5913dae5871bcf0484bb3eca2900b617bd4d25fd794270b00cb73ae8eb8c911d [stream]
+[debug] [2023-11-26T08:09:22.414Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63 200
+[debug] [2023-11-26T08:09:22.414Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/4b995a7a918604ac2f7e500c4fbb9cac62db3d347f16c9e67a320cd8540f7d63 [stream]
+[debug] [2023-11-26T08:09:22.507Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795 200
+[debug] [2023-11-26T08:09:22.507Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/def667aeb5152b41e513e857501d518a7a4a3b5f819d53ae38194908ffd4b795 [stream]
+[debug] [2023-11-26T08:09:22.588Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb 200
+[debug] [2023-11-26T08:09:22.588Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/bds-28/versions/65c9abb3e406bbf1/files/55786a9e8386d928ab17b67249a91867eb1c8c86508383a17b1c35bf45b3bdbb [stream]
+[debug] [2023-11-26T08:09:22.588Z] [hosting][upload queue][FINAL] {"max":1566,"min":1076,"avg":1224.75,"active":0,"complete":16,"success":16,"errored":0,"retried":0,"total":16,"elapsed":1568}
+[info] +  hosting[bds-28]: file upload complete 
+[debug] [2023-11-26T08:09:22.590Z] [hosting] deploy completed after 2335ms
+[debug] [2023-11-26T08:09:22.590Z] [
+  {
+    "config": {
+      "public": "dist/my-first-app",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "bds-28"
+    },
+    "version": "projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1"
+  }
+]
+[info] i  hosting[bds-28]: finalizing version... 
+[debug] [2023-11-26T08:09:22.594Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions/65c9abb3e406bbf1 updateMask=status%2Cconfig
+[debug] [2023-11-26T08:09:22.594Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions/65c9abb3e406bbf1 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2023-11-26T08:09:23.121Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions/65c9abb3e406bbf1 200
+[debug] [2023-11-26T08:09:23.121Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/versions/65c9abb3e406bbf1 {"name":"projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-11-26T08:09:00.766520Z","createUser":{"email":"52000841@student.tdtu.edu.vn"},"finalizeTime":"2023-11-26T08:09:24.041100Z","finalizeUser":{"email":"52000841@student.tdtu.edu.vn"}}
+[debug] [2023-11-26T08:09:23.121Z] [hosting] finalized version for bds-28:[object Object]
+[info] +  hosting[bds-28]: version finalized 
+[info] i  hosting[bds-28]: releasing new version... 
+[debug] [2023-11-26T08:09:23.124Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/channels/live/releases versionName=projects%2F840544543755%2Fsites%2Fbds-28%2Fversions%2F65c9abb3e406bbf1
+[debug] [2023-11-26T08:09:23.124Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/channels/live/releases {}
+[debug] [2023-11-26T08:09:23.699Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/channels/live/releases 200
+[debug] [2023-11-26T08:09:23.699Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/bds-28/channels/live/releases {"name":"projects/840544543755/sites/bds-28/channels/live/releases/1700986164005000","version":{"name":"projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-11-26T08:09:00.766520Z","createUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"},"finalizeTime":"2023-11-26T08:09:24.041100Z","finalizeUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"}},"type":"DEPLOY","releaseTime":"2023-11-26T08:09:24.005Z","releaseUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"}}
+[debug] [2023-11-26T08:09:23.699Z] [hosting] release: {"name":"projects/840544543755/sites/bds-28/channels/live/releases/1700986164005000","version":{"name":"projects/840544543755/sites/bds-28/versions/65c9abb3e406bbf1","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-11-26T08:09:00.766520Z","createUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"},"finalizeTime":"2023-11-26T08:09:24.041100Z","finalizeUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"}},"type":"DEPLOY","releaseTime":"2023-11-26T08:09:24.005Z","releaseUser":{"email":"52000841@student.tdtu.edu.vn","imageUrl":"https://lh3.googleusercontent.com/a/ACg8ocJ5iAy_q4a9Q2Tobxfn-V9uosaeWsccWIrP2ux31G-2Gg"}}
+[info] +  hosting[bds-28]: release complete 
+[info] 
+[info] +  Deploy complete! 
+[info] 
+[info] Project Console: https://console.firebase.google.com/project/bds-28/overview
+[info] Hosting URL: https://bds-28.web.app
+[debug] [2023-11-26T08:09:54.790Z] Error: Timed out.
+    at Timeout._onTimeout (C:\Users\khoin\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:254:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.

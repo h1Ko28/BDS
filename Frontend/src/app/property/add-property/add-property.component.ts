@@ -21,13 +21,13 @@ export class AddPropertyComponent implements OnInit {
   nextClick!: boolean;
   addPropertyForm!: FormGroup;
   property = new Property()
-  propertys!:Property
-
+  propertys!:Property;
 
   propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex'];
   furnishTypes: Array<string> = ['Fully', 'Half', 'Unfurnish'];
   destination: Array<string> = ['East', 'West', 'South', 'North'];
-  
+  citiList!: string[];
+
   propertyView: IPropertyBase = {
     Id: null,
     Name: '',
@@ -42,7 +42,7 @@ export class AddPropertyComponent implements OnInit {
   };
 
   constructor(
-    private router: Router, private fb: FormBuilder, 
+    private router: Router, private fb: FormBuilder,
     private alert: AlertifyService, private housing: HousingService
     ) { }
 
@@ -83,7 +83,7 @@ export class AddPropertyComponent implements OnInit {
     });
   }
 
-  
+
 
 //#region <Getter Methods>
   // #region <FormGroups>
@@ -193,6 +193,10 @@ export class AddPropertyComponent implements OnInit {
 
   ngOnInit() {
     this.CreateAddPropertyForm();
+    this.housing.getAllCities().subscribe(data => {
+      this.citiList = data;
+      console.log(data);
+    })
   }
 
   onSubmit(){

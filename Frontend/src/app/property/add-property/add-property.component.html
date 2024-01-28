@@ -89,8 +89,8 @@
                   <select
                   class="form-control" formControlName="City"
                   [(ngModel)]="propertyView.City">
-                    <option *ngFor="let city of citiList" value="{{city}}">
-                      {{city}}
+                    <option *ngFor="let city of citiList" value="{{city.id}}">
+                      {{city.name}}
                     </option>
                   </select>
                   <div class="error-block" *ngIf="City.invalid && nextClick">

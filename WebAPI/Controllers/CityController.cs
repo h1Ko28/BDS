@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
@@ -13,9 +14,8 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CityController : ControllerBase
+    [Authorize]
+    public class CityController : BaseController 
     {
         private readonly IUnitOfWork uow;
         private readonly IMapper  mapper;
@@ -27,6 +27,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        // [AllowAnonymous]
         public async Task<IActionResult> GetCities()
         {
             var cities = await uow.CityRepository.GetCities();
@@ -37,18 +38,13 @@ namespace WebAPI.Controllers
             //     Id = c.Id,
             //     Name = c.Name,
             // };
-            return Ok(citiesDto);
+            return Ok(citiesDto);  
         }
 
         [HttpPost("post")]
         // public async Task<IActionResult> AddCities(string cityName)
         public async Task<IActionResult> AddCities(CityDto cityDto)
         {
-            // var city = new City{
-            //     Name = cityDto.Name,
-            //     LastUpdatedBy = 10,
-            //     LastUpdatedOn = DateTime.Now
-            // };
             var city = mapper.Map<City>(cityDto);
             city.LastUpdatedBy = 1;
             city.LastUpdatedOn = DateTime.Now;
@@ -61,10 +57,18 @@ namespace WebAPI.Controllers
         [HttpPut("updated/{id}")]
         public async Task<IActionResult> UpdateCity(int id, CityDto cityDto)
         {
+            if (id != cityDto.Id)
+                return BadRequest("Updated are not allowed");
+
             var cityFromDB = await uow.CityRepository.FindCity(id);
+            
+            if (cityFromDB == null)
+                return BadRequest("Update not allowed");
+
             cityFromDB.LastUpdatedBy = 1;
             cityFromDB.LastUpdatedOn = DateTime.Now;
             mapper.Map(cityDto,cityFromDB);
+            throw new UnauthorizedAccessException();
             await uow.SaveAsync();
             return StatusCode(201);
         }

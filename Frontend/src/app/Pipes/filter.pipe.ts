@@ -10,7 +10,7 @@ export class FilterPipe implements PipeTransform {
     if (value.length === 0 || filerString === '' || propName === '') {
       return value;
     }
-    
+
     for (const item of value) {
       if (item[propName] === filerString) {
         resultArray.push(item)

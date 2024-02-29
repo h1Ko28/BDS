@@ -32,13 +32,25 @@ namespace WebAPI.Controllers
             var user = await unitOfWork.UserRepository.Authenticate(loginReq.UserName, loginReq.Password);
 
             if (user == null) {
-                return Unauthorized();
+                return Unauthorized("Invalid username or password");
             }
 
             var loginRes = new LoginResDto();
             loginRes.UserName = user.Username;
             loginRes.Token = CreateJWT(user);
             return Ok(loginRes);
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(LoginReqDto loginReq)
+        {
+            if (await unitOfWork.UserRepository.UserAlreadyExists(loginReq.UserName))
+                return BadRequest("UserName already exists");
+            
+            unitOfWork.UserRepository.Register(loginReq.UserName, loginReq.Password);
+            
+            await unitOfWork.SaveAsync();
+            return StatusCode(201); 
         }
 
         private string CreateJWT(User user) 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { User } from 'src/app/model/user';
+import { AbstractControl, FormBuilder, FormGroup, NgForm, ValidationErrors, Validators } from '@angular/forms';
+import { UserForRegister } from 'src/app/model/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-user-register',
@@ -10,17 +10,17 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit {
-  
+
   registerationForm!: FormGroup
-  user!: User;
+  user!: UserForRegister;
   userSubmitted!: boolean;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private alert: AlertifyService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private alert: AlertifyService) { }
 
   ngOnInit() {
     this.createRegisterationForm();
   }
-  
+
   createRegisterationForm() {
     this.registerationForm =  this.fb.group({
         userName: [null, Validators.required],
@@ -30,6 +30,21 @@ export class UserRegisterComponent implements OnInit {
         mobile: [null, [Validators.required, Validators.maxLength(10)]]
     }, {validators: this.passwordMatchingValidator});
   }
+
+  onSubmit() {
+    this.userSubmitted = true;
+
+    if (this.registerationForm.valid) {
+        // this.user = Object.assign(this.user, this.registerationForm.value);
+        this.authService.RegisUser(this.dataUser()).subscribe(() =>
+        {
+          this.onReset();
+          this.alert.success('Congrats, you are successfully registered');
+        },error => {
+          this.alert.error(error.error);
+        });
+    }
+}
 
   passwordMatchingValidator(fc: AbstractControl): ValidationErrors | null {
     return fc.get('password')?.value === fc.get('confirmPassword')?.value ? null :
@@ -52,24 +67,17 @@ export class UserRegisterComponent implements OnInit {
     return this.registerationForm.get('mobile')
   }
 
-  onSubmit(){
-    this.userSubmitted = true;
-    if(this.registerationForm.valid){
-      this.userService.addUser(this.dataUser());
-      this.registerationForm.reset();
-      this.userSubmitted = false;
-      this.alert.success('Register Successful!');
-    } else {
-      this.alert.error('Something went wrong!');
-    }
-  }
-
-  dataUser(): User{
+  dataUser(): UserForRegister{
     return this.user = {
       userName: this.userName?.value,
       email: this.email?.value,
       password: this.password?.value,
       mobile: this.mobile?.value
     }
+  }
+
+  onReset() {
+    this.userSubmitted = false;
+    this.registerationForm.reset();
   }
 }

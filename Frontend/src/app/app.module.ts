@@ -19,7 +19,6 @@ import { PropertyDetailComponent } from './property/property-detail/property-det
 import { UserLoginComponent } from './user/user-login/user-login.component';
 import { UserRegisterComponent } from './user/user-register/user-register.component';
 import { AlertifyService } from './services/alertify.service';
-import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
@@ -30,8 +29,8 @@ const appRoute: Routes = [
   {path: 'add-property', component: AddPropertyComponent},
   {path: '', component: PropertyListComponent},
   {path: 'rent-property', component: PropertyListComponent},
-  {path: 'property-detail/:id', 
-          component: PropertyDetailComponent, 
+  {path: 'property-detail/:id',
+          component: PropertyDetailComponent,
           resolve: {prp: PropertyDetailResolverService}},
   {path: 'user/login', component: UserLoginComponent},
   {path: 'user/register', component: UserRegisterComponent},
@@ -39,7 +38,7 @@ const appRoute: Routes = [
 ]
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     PropertyCardComponent,
     PropertyListComponent,
@@ -67,7 +66,6 @@ const appRoute: Routes = [
   providers: [
     HousingService,
     AlertifyService,
-    UserService,
     AuthService,
     PropertyDetailResolverService
   ],

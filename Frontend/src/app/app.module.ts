@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +24,7 @@ import { PropertyDetailResolverService } from './property/property-detail/proper
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
+import { HttpErrorInterceptorSevice } from './services/httperror-interceptor.service';
 
 const appRoute: Routes = [
   {path: 'add-property', component: AddPropertyComponent},
@@ -64,6 +65,11 @@ const appRoute: Routes = [
     CarouselModule.forRoot()
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorSevice,
+      multi: true
+    },
     HousingService,
     AlertifyService,
     AuthService,

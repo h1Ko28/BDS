@@ -6,6 +6,6 @@ export interface UserForRegister{
 }
 
 export interface UserForLogin{
-  UserName: string;
-  Token: string;
+  userName: string;
+  token: string;
 }

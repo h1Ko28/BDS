@@ -40,8 +40,6 @@ export class UserRegisterComponent implements OnInit {
         {
           this.onReset();
           this.alert.success('Congrats, you are successfully registered');
-        },error => {
-          this.alert.error(error.error);
         });
     }
 }

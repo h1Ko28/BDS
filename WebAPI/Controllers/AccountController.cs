@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Dto;
 using WebAPI.Dtos;
+using WebAPI.Errors;
+using WebAPI.Extensions;
 using WebAPI.Interfaces;
 using WebAPI.Models;
 
@@ -29,6 +31,13 @@ namespace WebAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginReqDto loginReq)
         {
+            ApiError error = new ApiError();
+
+            if (loginReq.UserName.isEmpty() || loginReq.Password.isEmpty()) {
+                error.ErrorCode = BadRequest().StatusCode;
+                error.ErrorMessage = "Username or password can not be blank";
+                return BadRequest(error);
+            }
             var user = await unitOfWork.UserRepository.Authenticate(loginReq.UserName, loginReq.Password);
 
             if (user == null) {

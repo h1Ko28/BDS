@@ -40,7 +40,7 @@ namespace WebAPI.Middlewares
                     statusCode = HttpStatusCode.InternalServerError;
                     message = "Some unknow error has occured";
                 }
-
+ 
                 if (env.IsDevelopment()) {
                     response = new ApiError((int)statusCode, ex.Message, ex.StackTrace.ToString());
                 } else {

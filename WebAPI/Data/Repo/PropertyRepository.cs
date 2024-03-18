@@ -28,8 +28,24 @@ namespace WebAPI.Data.Repo
 
         public async Task<IEnumerable<Property>> GetPropertiesAsync(int sellRent)
         {
-            var properties = await dc.Properties.ToListAsync();
+            var properties = await dc.Properties
+            .Include(p => p.PropertyType)
+            .Include(p => p.FurnishingType)     
+            .Include(p => p.City)
+            .Where(p => p.SellRent == sellRent)
+            .ToListAsync();
             return properties;
+        }
+
+        public async Task<Property> GetPropertyDetailAsync(int id)
+        {
+            var property = await dc.Properties
+            .Include(p => p.PropertyType)
+            .Include(p => p.FurnishingType)     
+            .Include(p => p.City)
+            .Where(p => p.Id == id)
+            .FirstAsync();
+            return property;
         }
     }
 }

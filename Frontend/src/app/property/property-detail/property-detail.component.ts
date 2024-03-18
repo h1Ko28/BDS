@@ -13,7 +13,7 @@ export class PropertyDetailComponent implements OnInit {
   public propertyId!: number;
   property = new Property();
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
               private routing: Router,
               private housing: HousingService) { }
 
@@ -25,6 +25,8 @@ export class PropertyDetailComponent implements OnInit {
         this.property = data['prp'];
       }
     )
+
+    this.property.age = this.housing.getPropertyAge(this.property.estPossessionOn);
 
     // this.route.params.subscribe(
     //   (params) => {

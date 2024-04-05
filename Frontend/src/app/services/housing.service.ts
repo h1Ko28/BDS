@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -36,13 +36,12 @@ export class HousingService {
   }
 
   addProperty(property: Property){
-    let newProp = [property];
-
-    if(localStorage.getItem('newProp')){
-      newProp = [property,
-        ...JSON.parse(localStorage.getItem('newProp') as string)];
-    }
-    localStorage.setItem('newProp', JSON.stringify(newProp));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token')
+      })
+    };
+    return this.http.post('http://localhost:5237/api/property/add', property, httpOptions)
   }
 
   newPropID() {
@@ -56,7 +55,7 @@ export class HousingService {
     }
   }
 
-  getPropertyAge(dateofEstablishment: Date): string
+  getPropertyAge(dateofEstablishment: string): string
   {
       const today = new Date();
       const estDate = new Date(dateofEstablishment);

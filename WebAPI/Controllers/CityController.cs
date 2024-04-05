@@ -64,11 +64,8 @@ namespace WebAPI.Controllers
             
             if (cityFromDB == null)
                 return BadRequest("Update not allowed");
-
-            cityFromDB.LastUpdatedBy = 1;
-            cityFromDB.LastUpdatedOn = DateTime.Now;
+                
             mapper.Map(cityDto,cityFromDB);
-            throw new UnauthorizedAccessException();
             await uow.SaveAsync();
             return StatusCode(201);
         }
@@ -77,8 +74,6 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> DeleteCities(int id)
         {
             uow.CityRepository.DeleteCity(id);
-            // City city = new City();
-            // city.Name = cityName;
             await uow.SaveAsync();
             return Ok(id);
         }

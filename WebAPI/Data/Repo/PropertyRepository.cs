@@ -17,7 +17,7 @@ namespace WebAPI.Data.Repo
 
         public void AddProperty(Property property)
         {
-            throw new NotImplementedException();
+            dc.Properties.Add(property);
         }
 
 
@@ -41,7 +41,8 @@ namespace WebAPI.Data.Repo
         {
             var property = await dc.Properties
             .Include(p => p.PropertyType)
-            .Include(p => p.FurnishingType)     
+            .Include(p => p.FurnishingType)
+            .Include(p => p.Photos)
             .Include(p => p.City)
             .Where(p => p.Id == id)
             .FirstAsync();

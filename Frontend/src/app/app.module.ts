@@ -25,6 +25,7 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { SortPipe } from './Pipes/sort.pipe';
 import { HttpErrorInterceptorSevice } from './services/httperror-interceptor.service';
+import { DatePipe } from '@angular/common';
 
 const appRoute: Routes = [
   {path: 'add-property', component: AddPropertyComponent},
@@ -70,6 +71,7 @@ const appRoute: Routes = [
       useClass: HttpErrorInterceptorSevice,
       multi: true
     },
+    DatePipe,
     HousingService,
     AlertifyService,
     AuthService,

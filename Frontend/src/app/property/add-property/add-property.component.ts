@@ -8,6 +8,7 @@ import { HousingService } from 'src/app/services/housing.service';
 import { Property } from 'src/app/model/property';
 import { IKeyPairValue } from 'src/app/model/ikeypairvalue';
 import * as moment from 'moment';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -41,11 +42,12 @@ export class AddPropertyComponent implements OnInit {
     bhk: null,
     builtArea: null,
     city: '',
-    readyToMove: null
-};
+    readyToMove: null,
+    estPossessionOn: null
+  };
 
   constructor(
-    private router: Router, private fb: FormBuilder,
+    private router: Router, private fb: FormBuilder, private datePipe: DatePipe,
     private alert: AlertifyService, private housingService: HousingService
     ) { }
 
@@ -64,8 +66,8 @@ export class AddPropertyComponent implements OnInit {
         Price: [null, Validators.required],
         BuiltArea: [null, Validators.required],
         CarpetArea: [null],
-        Security: [null],
-        Maintenance: [null],
+        Security: [0],
+        Maintenance: [0],
       }),
 
       AddressInfo: this.fb.group({
@@ -209,25 +211,19 @@ export class AddPropertyComponent implements OnInit {
     })
   }
 
-  updatePossessionOn(value: string) : Date{
-    // Parse the string value to a Date object
-    const dateObject = moment(value).toDate();
-    // this.propertyView.estPossessionOn = dateObject;
-    return dateObject;
-  }
-
   onSubmit(){
     this.nextClick = true;
-    if(this.allValid()){
-      console.log(this.addPropertyForm.value.BasicInfo.SellRent);
+    if(this.allValid()) {
       this.mapProperty();
-      this.housingService.addProperty(this.property)
-      this.alert.success("You have assigned successfully!")
-      if(this.SellRent.value === "1"){
-        this.router.navigate(['/'])
-      } else {
-        this.router.navigate(['/rent-property'])
-      }
+      this.housingService.addProperty(this.property).subscribe(
+        () => {
+          this.alert.success("You have assigned successfully!")
+          if(this.SellRent.value === "1"){
+            this.router.navigate(['/'])
+          } else {
+            this.router.navigate(['/rent-property'])
+          }
+      });
     } else {
       this.alert.error("Please fill all the field!")
     }
@@ -237,10 +233,10 @@ export class AddPropertyComponent implements OnInit {
     this.property.id = this.housingService.newPropID();
     this.property.sellRent = +this.SellRent.value;
     this.property.bhk = this.BHK.value;
-    this.property.propertyType = this.PType.value;
+    this.property.propertyTypeId = this.PType.value;
     this.property.name = this.Name.value;
-    this.property.city = this.City.value;
-    this.property.furnishingType = this.FType.value;
+    this.property.CityId = this.City.value;
+    this.property.furnishingTypeId = this.FType.value;
     this.property.price = this.Price.value;
     this.property.security = this.Security.value;
     this.property.maintenance = this.Maintenance.value;
@@ -250,9 +246,11 @@ export class AddPropertyComponent implements OnInit {
     this.property.totalFloors = this.TotalFloor.value;
     this.property.address = this.Address.value;
     this.property.address2 = this.LandMark.value;
-    this.property.readyToMove = this.RTM.value;
+    const rtm = this.RTM.value === 'true' ? true: false;
+    this.property.readyToMove = rtm;
     this.property.age = this.AOP.value;
-    this.property.gated = this.Gated.value;
+    const gate = this.Gated.value === 'true' ? true: false;
+    this.property.gated = gate;
     this.property.mainEntrance = this.MainEntrance.value;
     this.property.estPossessionOn = this.PossessionOn.value;
     this.property.description = this.Description.value;

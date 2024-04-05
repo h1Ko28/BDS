@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAPI.Models.IEntity;
 
 namespace WebAPI.Models
 {
-    public class City : BaseEntity
+    public class City : IBaseEntity, IUpdateTracking
     {
+        public int Id { get; set; }
         public City(string name, string country)
         {
             this.Name = name;
@@ -21,5 +23,8 @@ namespace WebAPI.Models
         [Required]
         [Column(Order = 2)]
         public string Country { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
+        public int LastUpdatedBy { get; set; }
+
     }
 }

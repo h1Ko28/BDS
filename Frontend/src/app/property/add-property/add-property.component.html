@@ -202,14 +202,14 @@
                   <div class="btn-group" btnRadioGroup
                   formControlName="RTM">
                     <label class="btn btn-outline-primary mr-2"
-                      btnRadio=1 tabindex="0" role="button"
-                      (click)="propertyView.readyToMove=1"
+                      btnRadio=true tabindex="0" role="button"
+                      (change)="propertyView.readyToMove=true"
                       name="RTM">Yes
                     </label>
 
                     <label class="btn btn-outline-primary"
-                      btnRadio=2  tabindex="0" role="button"
-                      (click)="propertyView.readyToMove=0"
+                      btnRadio=false  tabindex="0" role="button"
+                      (change)="propertyView.readyToMove=false"
                       name="RTM">No
                     </label>
                   </div>
@@ -225,8 +225,8 @@
                   <input type="text"
                   class="form-control"
                   formControlName="PossessionOn"
-                  #PossessionOn
-                  (bsValueChange)="propertyView.estPossessionOn=updatePossessionOn(PossessionOn.value)"
+                  #possessionOn
+                  (bsValueChange)="propertyView.estPossessionOn=possessionOn.value"
                   bsDatepicker
                   [bsConfig]="{containerClass: 'theme-dark-blue',
                   dateInputFormat: 'MMM DD, YYYY'}">
@@ -234,9 +234,9 @@
                 <div class="form-group col-12" >
                   <p>Gated Community</p>
                   <div class="btn-group" btnRadioGroup formControlName="Gated">
-                    <label class="btn btn-outline-primary mx-2" btnRadio="1"
+                    <label class="btn btn-outline-primary mx-2" btnRadio="true"
                     role="button" name="gated">Yes</label>
-                    <label class="btn btn-outline-primary" btnRadio="2"
+                    <label class="btn btn-outline-primary" btnRadio="false"
                     role="button" name="gated">No</label>
                   </div>
                   <div class="error-block" *ngIf="Gated.invalid && nextClick">
@@ -250,13 +250,13 @@
                   <div class="btn-group" btnRadioGroup
                   formControlName="MainEntrance">
                     <label class="btn btn-outline-primary mr-2"
-                    btnRadio=1 tabindex="0" role="button" name="Entrance">East</label>
+                    btnRadio=East tabindex="0" role="button" name="Entrance">East</label>
                     <label class="btn btn-outline-primary"
-                    btnRadio=2  tabindex="0" role="button" name="Entrance">West</label>
+                    btnRadio=West  tabindex="0" role="button" name="Entrance">West</label>
                     <label class="btn btn-outline-primary"
-                    btnRadio=3  tabindex="0" role="button" name="Entrance">South</label>
+                    btnRadio=South  tabindex="0" role="button" name="Entrance">South</label>
                     <label class="btn btn-outline-primary"
-                    btnRadio=4  tabindex="0" role="button" name="Entrance">North</label>
+                    btnRadio=North  tabindex="0" role="button" name="Entrance">North</label>
                   </div>
                   <div class="error-block" *ngIf="MainEntrance.invalid && nextClick">
                     Please fill this field!

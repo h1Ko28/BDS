@@ -9,18 +9,30 @@ using WebAPI.Data;
 using WebAPI.Data.Repo;
 using WebAPI.Extensions;
 using WebAPI.Helper;
+using WebAPI.Interceptor;
 using WebAPI.Interfaces;
 using WebAPI.Middlewares;
+using WebAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+builder.Services.AddHttpContextAccessor();
 // Add services to the container.
+
+var token = builder.Services.BuildServiceProvider().GetService<TokenUserService>();
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataContext>(options => 
-options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+options.UseSqlServer(connectionString)
+.AddInterceptors(new UpdateTracking(token)));
+
+
 builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
+builder.Services.AddScoped<TokenUserService>();
+builder.Services.AddScoped<UpdateTracking>();
 
 var secretKey = builder.Configuration.GetSection("AppSettings:key").Value;
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));

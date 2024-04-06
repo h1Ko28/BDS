@@ -3,6 +3,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebAPI.Data;
@@ -17,13 +18,15 @@ using WebAPI.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<TokenUserService>();
 // Add services to the container.
-
-var token = builder.Services.BuildServiceProvider().GetService<TokenUserService>();
+var serviceProvider = builder.Services.BuildServiceProvider();
+var tokenUserService = serviceProvider.GetRequiredService<TokenUserService>();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DataContext>(options => 
-options.UseSqlServer(connectionString)
-.AddInterceptors(new UpdateTracking(token)));
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(connectionString)
+    .AddInterceptors(new UpdateTracking(tokenUserService)));
 
 
 builder.Services.AddControllers();
@@ -31,8 +34,8 @@ builder.Services.AddCors();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
-builder.Services.AddScoped<TokenUserService>();
 builder.Services.AddScoped<UpdateTracking>();
+
 
 var secretKey = builder.Configuration.GetSection("AppSettings:key").Value;
 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));

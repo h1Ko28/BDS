@@ -16,7 +16,8 @@ namespace WebAPI.Interceptor
         {
             _tokenUserService = tokenUserService;
         }
-        public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+
+        public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             var userId = _tokenUserService.GetCurrentUserId();
             var changeTracker = eventData.Context.ChangeTracker;
@@ -25,9 +26,10 @@ namespace WebAPI.Interceptor
             .Where(x => x.State == EntityState.Modified).ToList();
             foreach(var entityEntry in dateList){
                 entityEntry.Property(x => x.LastUpdatedOn).CurrentValue = DateTime.Now;
-                entityEntry.Property(x => x.LastUpdatedBy).CurrentValue = int.Parse(userId);
+                entityEntry.Property(x => x.LastUpdatedBy).CurrentValue = userId;
             }
-            return base.SavingChanges(eventData, result);
+            
+            return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
     }
 }

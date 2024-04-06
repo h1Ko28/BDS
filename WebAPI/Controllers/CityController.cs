@@ -33,11 +33,7 @@ namespace WebAPI.Controllers
             var cities = await uow.CityRepository.GetCities();
 
             var citiesDto = mapper.Map<IEnumerable<CityDto>>(cities);
-            // var citiDto = from c in cities select
-            // new CityDto{
-            //     Id = c.Id,
-            //     Name = c.Name,
-            // };
+            
             return Ok(citiesDto);  
         }
 

@@ -15,10 +15,10 @@ namespace WebAPI.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public string GetCurrentUserId()
+        public int GetCurrentUserId()
         {
             var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-            return userIdClaim?.Value;
+            return int.Parse(userIdClaim?.Value);
         }
     }
 }

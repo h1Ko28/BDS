@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using WebAPI.Dtos;
 using WebAPI.Interfaces;
@@ -12,6 +13,7 @@ using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
+    [Authorize]
     public class PropertyController : BaseController
     {
         private readonly IUnitOfWork uow;
@@ -43,7 +45,6 @@ namespace WebAPI.Controllers
         }
         
         [HttpPost("add")]
-        [Authorize]
         public async Task<IActionResult> AddProperty(PropertyDto propertyDto) {
             var property = mapper.Map<Property>(propertyDto);
             var userId = GetUserId();
@@ -55,7 +56,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add/photo/{id}")]
-        [Authorize]
         public async Task<IActionResult> UploadImage(IFormFile photo, int id) {
             var upload = await photoService.AddPhotoAsync(photo);
             if (upload.Error != null)
@@ -73,6 +73,28 @@ namespace WebAPI.Controllers
             property.Photos.Add(photos);
             await uow.SaveAsync();
             return Ok(201);
+        }
+
+        [HttpDelete("delete-photo/{propId}/{publicId}")]
+        public async Task<ActionResult> DeletePhoto(int propId, string publicId){
+            var prop = await uow.PropertyRepository.GetPropertyDetailAsync(propId);
+            if(prop == null)
+                return BadRequest("prop does not exist");
+
+            var DeletePhoto = await photoService.DeletePhotoAsync(publicId);
+            if(DeletePhoto.Error != null)
+                return BadRequest("delete");
+
+            var photo = prop.Photos.FirstOrDefault(p => p.PublicId == publicId);
+            if(photo == null)
+                return BadRequest("get photo");
+            
+            prop.Photos.Remove(photo);
+
+            if(await uow.SaveAsync())
+                return Ok();
+
+            return BadRequest("Something went wrong, fail to delete photo");
         }
     }
 }

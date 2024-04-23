@@ -1,0 +1,22 @@
+2024-04-16 15:58:23.900 +07:00 [INF] This is my very first loggin
+2024-04-16 16:01:51.893 +07:00 [INF] User profile is available. Using 'C:\Users\khoin\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-04-16 16:01:52.028 +07:00 [INF] Now listening on: http://localhost:5237
+2024-04-16 16:01:52.032 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-04-16 16:01:52.032 +07:00 [INF] Hosting environment: Development
+2024-04-16 16:01:52.033 +07:00 [INF] Content root path: D:\BDS\webapi
+2024-04-16 16:01:52.268 +07:00 [INF] Request starting HTTP/1.1 GET http://localhost:5237/ - -
+2024-04-16 16:01:52.368 +07:00 [INF] HTTP GET / responded 404 in 38.0162 ms
+2024-04-16 16:01:52.375 +07:00 [INF] Request finished HTTP/1.1 GET http://localhost:5237/ - - - 404 0 - 110.8755ms
+2024-04-16 16:02:10.207 +07:00 [INF] Request starting HTTP/1.1 POST http://localhost:5237/api/account/login application/json 59
+2024-04-16 16:02:10.212 +07:00 [INF] Executing endpoint 'WebAPI.Controllers.AccountController.Login (WebAPI)'
+2024-04-16 16:02:10.238 +07:00 [INF] Route matched with {action = "Login", controller = "Account"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(WebAPI.Dto.LoginReqDto) on controller WebAPI.Controllers.AccountController (WebAPI).
+2024-04-16 16:02:11.664 +07:00 [INF] Executed DbCommand (51ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[LastUpdatedBy], [u].[LastUpdatedOn], [u].[Password], [u].[PasswordKey], [u].[Username]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__userName_0
+2024-04-16 16:02:11.830 +07:00 [INF] Executing OkObjectResult, writing value of type 'WebAPI.Dtos.LoginResDto'.
+2024-04-16 16:02:11.844 +07:00 [INF] Executed action WebAPI.Controllers.AccountController.Login (WebAPI) in 1603.0922ms
+2024-04-16 16:02:11.844 +07:00 [INF] Executed endpoint 'WebAPI.Controllers.AccountController.Login (WebAPI)'
+2024-04-16 16:02:11.845 +07:00 [INF] HTTP POST /api/account/login responded 200 in 1637.1657 ms
+2024-04-16 16:02:11.852 +07:00 [INF] Request finished HTTP/1.1 POST http://localhost:5237/api/account/login application/json 59 - 200 - application/json;+charset=utf-8 1644.7658ms
+2024-04-16 16:13:08.071 +07:00 [INF] Application is shutting down...
